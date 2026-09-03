@@ -1,6 +1,6 @@
 ---
 title: "Problem Set 03: Data Wrangling"
-author: "Your Name"
+author: "Chris Hall"
 date: last-modified
 date-format: "[Last modified on] MMMM DD, YYYY HH:mm:ss zzz"
 format: 
@@ -59,10 +59,16 @@ Examine `txhousing` in the data viewer. You can accomplish this two different wa
 ::: {.callout-important icon="false" collapse="false" title="Problem 1 Answers"}
 ```{r}
 # Type your code and comments inside the code chunk
+tail(txhousing, n = 1)
 
+txhousing$city[8602]
+
+last <- nrow(txhousing)
+last
+txhousing$city[last]
 ```
 
--   Delete this and put your text answer here.
+-   The last listed in `txhousing` is **`r txhousing$city[nrow(txhousing)]`** .
 :::
 
 ::: {.callout-note icon="false" title="Problem 2"}
@@ -241,7 +247,13 @@ Write a code chunk to remove the inventory variable. Save the results in a data 
 ::: {.callout-important icon="false" collapse="false" title="Problem 3 Answers"}
 ```{r}
 # Type your code and comments inside the code chunk
+txhousing <- txhousing |>
+  select(-inventory)
+head(txhousing)
 
+names(txhousing)
+ifelse(sum(names(txhousing) %in% c("inventory")) == 0,
+       "Variable Removed", "Variable Not Removed")
 ```
 :::
 
